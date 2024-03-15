@@ -1,44 +1,31 @@
-version: "3.9"
-services:
-  db:
-    image: mariadb:11.3-jammy
-    container_name: PrestaShop-DB
-    hostname: prestashop-db
-    mem_limit: 1g
-    cpu_shares: 768
-    security_opt:
-      - no-new-privileges:true
-    user: 1026:100
-    volumes:
-      - /volume1/docker/prestashop/db:/var/lib/mysql:rw
-      - /volume1/docker/prestashop/db:/etc/mysql/conf.d:rw
-    environment:
-      TZ: Europe/Bucharest
-      MYSQL_ROOT_PASSWORD: rootpass
-      MYSQL_USER: prestashopuser
-      MYSQL_PASSWORD: prestashoppass
-      MYSQL_DATABASE: prestashop
-    restart: on-failure:5
-
-  prestashop:
-    image: prestashop/prestashop:latest
-    container_name: PrestaShop
-    hostname: prestashop
-    mem_limit: 3g
-    cpu_shares: 1024
-    security_opt:
-      - no-new-privileges:true
-    ports:
-      - 8779:80
-    volumes:
-      - /volume1/docker/prestashop/data:/var/www/html:rw
-    environment:
-      DB_SERVER: prestashop-db
-      DB_NAME: prestashop
-      DB_USER: prestashopuser
-      DB_PASSWD: prestashoppass
-      PS_DOMAIN: prestashop.yourname.synology.me
-    restart: on-failure:5
-    depends_on:
-      db:
-        condition: service_started
+version: "3"
+networks: 
+    prestashop_network:
+services: 
+    mysql:
+        image: mysql:5.7
+        container_name: prestashop-mysql 
+        tty: true
+        ports:
+            - 4206:3306
+        volumes:
+            - ./var/lib/mysql/:/var/lib/mysql
+        environment: 
+            MYSQL_ROOT_PASSWORD: admin
+            MYSQL_DATABASE: prestashop
+        networks: 
+            - prestashop_network
+    prestashop:
+        container_name: prestasoft
+        image: prestashop/prestashop:latest
+        ports:
+            - "4280:80"
+        volumes:
+            - /volume1/docker/prestashop/data:/var/www/html:rw
+        environment:
+            DB_SERVER: prestashop-mysql
+            DB_NAME: prestashop
+            DB_USER: root
+            DB_PASSWD: admin
+        depends_on:  
+            - mysql
