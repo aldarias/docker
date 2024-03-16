@@ -1,0 +1,44 @@
+version: "3.9"
+services:
+  db:
+    image: mariadb:jammy
+    container_name: Moodle-DB
+    hostname: moodle-db
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      - TZ=Europe/Bucharest
+      - MYSQL_ROOT_PASSWORD=rootpass
+      - MYSQL_DATABASE=moodle
+      - MYSQL_USER=moodleuser
+      - MYSQL_PASSWORD=moodlepass
+    volumes:
+      - /volume1/docker/moodle/db:/var/lib/mysql:rw
+    restart: always
+
+  moodle:
+    image: bitnami/moodle:latest
+    container_name: Moodle
+    hostname: moodle
+    security_opt:
+      - no-new-privileges:true
+    ports:
+      - 9490:80
+    environment:
+      - MOODLE_DATABASE_HOST=moodle-db
+      - MOODLE_DATABASE_PORT_NUMBER=3306
+      - MOODLE_DATABASE_NAME=moodle
+      - MOODLE_DATABASE_USER=moodleuser
+      - MOODLE_DATABASE_PASSWORD=moodlepass
+      - PHP_MEMORY_LIMIT=512M
+      - PHP_UPLOAD_MAX_FILESIZE=512M
+      - MOODLE_USERNAME=marius
+      - MOODLE_PASSWORD=mariushosting
+      - MOODLE_SITE_NAME=Learn With Marius
+    volumes:
+      - /volume1/docker/moodle/data1:/bitnami/moodle:rw
+      - /volume1/docker/moodle/data2:/bitnami/moodledata:rw
+    restart: always
+    depends_on:
+      db:
+        condition: service_started
