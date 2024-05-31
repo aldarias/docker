@@ -1,0 +1,29 @@
+version: "2"
+services:
+    youtubedl_material:
+        environment: 
+            youtubedl_mongodb_connection_string: 'mongodb://youtubedl-mongo-db:27017'
+            youtubedl_use_local_db: 'false'
+            youtubedl_ytdl_config: 'true'
+        restart: always
+        depends_on:
+            - youtubedl-mongo-db
+        volumes:
+            - /volume1/docker/youtubedl/appdata:/app/appdata
+            - /volume1/docker/youtubedl/audio:/app/audio
+            - /volume1/docker/youtubedl/video:/app/video
+            - /volume1/docker/youtubedl/subscriptions:/app/subscriptions
+            - /volume1/docker/youtubedl/users:/app/users
+        ports:
+            - "8084:17442"
+        image: tzahi12345/youtubedl-material:latest
+    youtubedl-mongo-db:
+        # If you are using a Raspberry Pi, use mongo:4.4.18
+        image: mongo:4
+        logging:
+            driver: "none"          
+        container_name: mongo-db
+        restart: always
+        volumes:
+            - /volume1/docker/youtubedl/db/:/data/db
+
