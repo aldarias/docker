@@ -7,7 +7,7 @@ Licencia Creative Common CC BY-NC-SA
 Reconocimiento-NoComercial-CompartirIgual.
 
 * v1.0
-	* Fecha: 9-10-2021 Versión inicial
+	* Fecha: 9-06-2024 Versión inicial
 
 Por Paco Aldarias Raya
 
