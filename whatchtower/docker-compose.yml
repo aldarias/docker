@@ -1,44 +1,14 @@
-## docker-compose.yml
-version: '3.8'
-
-networks:
- default:
-   name: "traefik_net"
-   external: true
-
 services:
- watchtower:
-   image: "containrrr/watchtower”
-   container_name: "demo_watchtower”
-   hostname: "watchtower.localhost”
-   restart: "unless-stopped”
-   environment:
-     # Following options are otrional START
-     - "WATCHTOWER_NOTIFICATIONS=gotify”
-     - "WATCHTOWER_NOTIFICATION_GOTIFY_URL=http://gotify.localhost”
-     - "WATCHTOWER_NOTIFICATION_GOTIFY_TOKEN=YOUR_GOTIFY_TOKEN”
-     # END
-     - "WATCHTOWER_CLEANUP=true”
-     - "WATCHTOWER_LABEL_ENABLE=true”
-     - "WATCHTOWER_INCLUDE_RESTARTING=true”
-     - "WATCHTOWER_ROLLING_RESTARTING=true”
-     - "WATCHTOWER_INTERVAL=200”
-     - "WATCHTOWER_INCLUDE_STOPPED=true”
-   security_opt:
-     - "no-new-privileges:true”
-   volumes:
-     - "/etc/timezone:/etc/timezone:ro”
-     - "/etc/localtime:/etc/localtime:ro”
-     - "/var/run/docker.sock:/var/run/docker.sock”
-   labels:
-     # Watchtower add to auto update
-     - "com.centurylinklabs.watchtower.enable=true”
-     # traefik labels are optional ( just with gotify )
-     - "traefikf.enable=true”
-     - "traefik.docker.network=traefik_net”
-     - "traefik.http.routers.${PROJECT_NAME}_watchtower.entrypoints=websecure”
-     - "traefik.http.routers.${PROJECT_NAME}_watchtower.rule=Host(`watchtower.localhost`)”
-     - "traefik.http.routers.${PROJECT_NAME}_watchtower.tls=true”
-     - "traefik.http.services.${PROJECT_NAME}_watchtower.loadbalancer.server.port=3000"
-
-
+  watchtower:
+    container_name: watchtower
+    image: containrrr/watchtower
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - TZ=$TZ
+      - WATCHTOWER_CLEANUP=true                                        
+      - WATCHTOWER_INCLUDE_RESTARTING=true
+      - WATCHTOWER_POLL_INTERVAL=36000                  
+      #- WATCHTOWER_SCHEDULE=0 0 9 * * *
+      #- WATCHTOWER_DEBUG=true   
