@@ -11,7 +11,7 @@ Reconocimiento-NoComercial-CompartirIgual.
 
 Por Paco Aldarias Raya
 
-[Aula Mentor](http://aldarias.es)
+[Blog](http://aldarias.es)
 
 paco.aldarias@gmail.com
 
