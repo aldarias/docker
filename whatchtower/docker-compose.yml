@@ -1,7 +1,7 @@
 version: "3.5"
 services: 
- watchtower: 
-     image: containrrr/watchtower:latest 
+  watchtower:
+     image: containrrr/watchtower
      container_name: watchtower 
      restart: unless-stopped 
      volumes: 
