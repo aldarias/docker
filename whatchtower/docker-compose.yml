@@ -1,9 +1,6 @@
-
-
 ## docker-compose.yml
 version: '3.8'
 
-# network is optional just needed with gotify
 networks:
  default:
    name: "traefik_net"
