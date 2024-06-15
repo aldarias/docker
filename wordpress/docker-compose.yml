@@ -13,6 +13,7 @@ services:
       WORDPRESS_DB_NAME: exampledb
     volumes:
       - /volume1/docker/wordpress:/var/www/html
+      -./volume1/docker/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
 
   db:
     image: mysql:5.7
