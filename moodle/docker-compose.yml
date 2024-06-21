@@ -27,6 +27,7 @@ services:
       - MOODLE_USERNAME=admin # usuario de moodle
       - MOODLE_PASSWORD=moodle # contraseña del usuario de moodle creado
       - MOODLE_EMAIL=hola@mundo.es # email del usuario de moodle creado
+      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - 'moodle_data:/bitnami/moodle'
       - 'moodledata_data:/bitnami/moodledata'
