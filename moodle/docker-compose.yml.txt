@@ -1,0 +1,35 @@
+version: '2'
+  services:
+  mariadb:
+  image: 'docker.io/bitnami/mariadb:10.1'
+  environment:
+  - MARIADB_USER=bn_moodle # usuario de la base de datos
+  - MARIADB_DATABASE=bitnami_moodle # nombre de la base de datos
+  - ALLOW_EMPTY_PASSWORD=no # no permite tener contraseñas de usuarios de la db
+  vacías
+  - MARIADB_PASSWORD=admin
+  - MARIADB_ROOT_PASSWORD=admin
+  volumes:
+  - '/root/moodle/mariadb-data:/bitnami'
+  moodle:
+  image: 'docker.io/bitnami/moodle:3'
+  environment:
+  - MARIADB_HOST=mariadb # mismo que el especificado arriba
+  - MARIADB_PORT_NUMBER=3306 # por defecto 3306
+  - MOODLE_DATABASE_USER=bn_moodle # mismo que el especificado arriba
+  - MOODLE_DATABASE_NAME=bitnami_moodle # mismo que el especificado arriba
+  - MOODLE_DATABASE_PASSWORD=admin
+  - MOODLE_USERNAME=admin # usuario de moodle
+  - MOODLE_PASSWORD=moodle # contraseña del usuario de moodle creado
+  - MOODLE_EMAIL=hola@mundo.es # email del usuario de moodle creado
+  ports:
+  - '80:80' # http
+  - '443:443' # https
+  volumes:
+  - '/root/moodle/data:/bitnami'
+  - '/opt/bitnami/letsencrypt/certificates/DOMINIO.crt:/opt/bitnami/apache/conf/bitnami/certs/server.crt'
+  # cambiar la primera ruta por el nombre del certificado generado crt
+  - '/opt/bitnami/letsencrypt/certificates/DOMINIO.key:/opt/bitnami/apache/conf/bitnami/certs/server.key'
+  # cambiar la primera ruta por el nombre del certificado generado key
+  depends_on:
+  - mariadb
