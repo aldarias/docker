@@ -24,8 +24,9 @@ services:
       - MOODLE_DATABASE_PORT_NUMBER=3306
       - MOODLE_DATABASE_USER=bn_moodle
       - MOODLE_DATABASE_NAME=bitnami_moodle
-      # ALLOW_EMPTY_PASSWORD is recommended only for development.
-      - ALLOW_EMPTY_PASSWORD=yes
+      - MOODLE_USERNAME=admin # usuario de moodle
+      - MOODLE_PASSWORD=moodle # contraseña del usuario de moodle creado
+      - MOODLE_EMAIL=hola@mundo.es # email del usuario de moodle creado
     volumes:
       - 'moodle_data:/bitnami/moodle'
       - 'moodledata_data:/bitnami/moodledata'
