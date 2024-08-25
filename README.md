@@ -13,6 +13,6 @@ Por Paco Aldarias Raya
 
 [Blog](http://aldarias.es)
 
-paco.aldarias@gmail.com
+[Email](mailto://paco.aldarias@gmail.com)
 
 ![portainer config](portainer-config.png)
