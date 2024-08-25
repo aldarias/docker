@@ -11,8 +11,10 @@ Reconocimiento-NoComercial-CompartirIgual.
 
 Por Paco Aldarias Raya
 
+[Email] paco.aldarias@gmail.com
+
 [Blog](http://aldarias.es)
 
-[Email](mailto://paco.aldarias@gmail.com)
+Imagne de como usar github en portainer:
 
 ![portainer config](portainer-config.png)
