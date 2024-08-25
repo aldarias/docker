@@ -15,6 +15,6 @@ Por Paco Aldarias Raya
 
 [Blog](http://aldarias.es)
 
-Imagne de como usar github en portainer:
+Imagen de como usar github en portainer:
 
 ![portainer config](portainer-config.png)

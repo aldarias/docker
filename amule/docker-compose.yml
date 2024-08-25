@@ -7,8 +7,8 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Madrid
-      - GUI_PWD=perla02
-      - WEBUI_PWD=perla02
+      - GUI_PWD=mypassword
+      - WEBUI_PWD=mypassword
       - MOD_AUTO_RESTART_ENABLED=true
       - MOD_AUTO_RESTART_CRON=0 6 * * *
       - MOD_AUTO_SHARE_ENABLED=false
