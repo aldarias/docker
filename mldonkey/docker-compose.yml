@@ -1,7 +1,8 @@
+version: "2.1"
 services:
-  mldonkey:
-    image: logicwar/mldonkey:latest
-    container_name: mldonkey
+  mldonkey-server:
+    image: registry.gitlab.com/ricmaco/docker-mldonkey-server:latest
+    container_name: mldonkey-server
     environment:
       - PUID=1000
       - PGID=1000
@@ -11,13 +12,5 @@ services:
       - /volume1/docker/plex/movies:/mnt/mldonkey_completed # SKIP_BACKUP
       - /volume1/docker/mldonkey/temp/mldonkey:/mnt/mldonkey_tmp # SKIP_BACKUP
     ports:
-      - 4000:4000
-      - 4001:4001
       - 4080:4080
-      - 20562:20562
-      - 20562:20562/udp
-      - 20566:20566/udp
     restart: unless-stopped
-networks:
-  my-net:
-    external: true
