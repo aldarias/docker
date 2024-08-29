@@ -1,0 +1,26 @@
+# https://forum.openmediavault.org/index.php?thread/21733-how-to-install-mldonkey-mlnet-in-the-docker-plugin/
+services:
+  mldonkey:
+    image: logicwar/mldonkey:latest
+    container_name: mldonkey
+    networks:
+      my-net:
+    environment:
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
+    volumes:
+      - /volume1/docker/mldonkey:/var/lib/mldonkey
+      - /volume1/docker/plex/movies:/mnt/mldonkey_completed # SKIP_BACKUP
+      - /volume1/docker/mldonkey/Temp/mldonkey:/mnt/mldonkey_tmp # SKIP_BACKUP
+    ports:
+      - 4000:4000
+      - 4001:4001
+      - 4080:4080
+      - 20562:20562
+      - 20562:20562/udp
+      - 20566:20566/udp
+    restart: unless-stopped
+networks:
+  my-net:
+    external: true
