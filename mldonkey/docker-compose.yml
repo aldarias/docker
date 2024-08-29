@@ -2,8 +2,6 @@ services:
   mldonkey:
     image: logicwar/mldonkey:latest
     container_name: mldonkey
-    networks:
-      my-net:
     environment:
       - PUID=1000
       - PGID=1000
