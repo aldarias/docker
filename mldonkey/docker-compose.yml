@@ -8,7 +8,7 @@ services:
       - PGID=1000
       - TZ=Europe/Madrid
     volumes:
-      - /volume1/docker/mldonkey:/var/lib/mldonkey
+      - /volume1/docker/mldonkey/config:/config
       - /volume1/docker/plex/movies:/mnt/mldonkey_completed # SKIP_BACKUP
       - /volume1/docker/mldonkey/temp/mldonkey:/mnt/mldonkey_tmp # SKIP_BACKUP
     ports:
