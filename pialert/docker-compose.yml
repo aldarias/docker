@@ -1,0 +1,12 @@
+version: "3"
+services:
+  pialert:
+    image: jokobsk/pi.alert
+    ports:
+      - "20211:20211/tcp"
+    environment:
+      - TZ=Europe/Madrid
+    restart: unless-stopped
+    volumes:
+      - ./pialert_db:/home/pi/pialert/db
+      - ./config/pialert.conf:/home/pi/pialert/config/pialert.conf
