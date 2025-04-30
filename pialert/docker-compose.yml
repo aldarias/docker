@@ -11,9 +11,9 @@ services:
     environment:
       - TZ=Europe/Madrid
       - PORT=20212
-      - USER_ID=1026
-      - USER_GID=100
-      - HOST_USER_ID=1026
-      - HOST_USER_GID=100
+      - USER_ID=1000
+      - USER_GID=1000
+      - HOST_USER_ID=1000
+      - HOST_USER_GID=1000
     restart: unless-stopped
     network_mode: host
