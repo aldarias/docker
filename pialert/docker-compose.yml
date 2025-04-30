@@ -1,12 +1,19 @@
-version: "3"
+version: '3.5'
+
 services:
   pialert:
-    image: jokobsk/pi.alert
-    ports:
-      - "20211:20211/tcp"
+    container_name: pialert
+    image: jokobsk/pi.alert:latest
+    volumes:
+      - /volume1/docker/pialert/config:/home/pi/pialert/config
+      - /volume1/docker/pihole-unbound/pihole-configs/pihole-FTL.db:/etc/pihole/pihole-FTL.db:ro
+      - /volume1/docker/pialert/db/pialert.db:/home/pi/pialert/db/pialert.db
     environment:
       - TZ=Europe/Madrid
+      - PORT=20212
+      - USER_ID=1026
+      - USER_GID=100
+      - HOST_USER_ID=1026
+      - HOST_USER_GID=100
     restart: unless-stopped
-    volumes:
-      - ./pialert_db:/home/pi/pialert/db
-      - ./config/pialert.conf:/home/pi/pialert/config/pialert.conf
+    network_mode: host
