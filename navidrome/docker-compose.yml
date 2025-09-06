@@ -20,9 +20,9 @@ services:
     ports:
       - "8686:8686"
     volumes:
-      - /docker/lidarr/config:/config
-      - /docker/lidarr/music:/music
-      - /docker/lidarr/./downloads:/downloads
+      - /docker/navidrome/config:/config
+      - /docker/navidrome/music:/music
+      - /docker/navidrome/downloads:/downloads
     restart: unless-stopped
 
   sabnzbd:
@@ -31,6 +31,6 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - /docker/sabnzbd/config:/config
-      - /docker/sabnzbd/downloads:/downloads
+      - /docker/navidrome/config:/config
+      - /docker/navidrome/downloads:/downloads
     restart: unless-stopped
