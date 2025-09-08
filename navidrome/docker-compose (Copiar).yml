@@ -34,16 +34,3 @@ services:
       - /docker/navidrome/config:/config
       - /docker/navidrome/downloads:/downloads
     restart: unless-stopped
-    
-  jackett:
-    image: lscr.io/linuxserver/jackett:latest
-    container_name: jackett
-    environment:
-      - TZ=Europe/Madrid
-      - AUTO_UPDATE=true
-    volumes:
-      - /docker/navidrome/config:/config
-      - /docker/navidrome/downloads:/data/torrents
-    ports:
-      - 9117:9117
-    restart: unless-stopped
