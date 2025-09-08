@@ -34,8 +34,8 @@ services:
       - /docker/navidrome/config:/config
       - /docker/navidrome/downloads:/downloads
     restart: unless-stopped
-
- soularr:
+  
+  soularr:
     image: mrusse08/soularr:latest
     restart: unless-stopped
     container_name: soularr
@@ -49,6 +49,7 @@ services:
        
   jackett:
     image: lscr.io/linuxserver/jackett:latest
+    restart: unless-stopped
     container_name: jackett
     environment:
       - TZ=Europe/Madrid
@@ -58,4 +59,3 @@ services:
       - /docker/navidrome/downloads:/data/torrents
     ports:
       - 9117:9117
-    restart: unless-stopped
