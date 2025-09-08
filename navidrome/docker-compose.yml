@@ -34,9 +34,8 @@ services:
       - /docker/navidrome/config:/config
       - /docker/navidrome/downloads:/downloads
     restart: unless-stopped
-<<<<<<< HEAD
 
-soularr:
+ soularr:
     image: mrusse08/soularr:latest
     restart: unless-stopped
     container_name: soularr
@@ -47,9 +46,7 @@ soularr:
     volumes:
       - /docker/navidrome/downloads:/downloads
       - /docker/navidrome/data:/data
-    
-=======
-    
+       
   jackett:
     image: lscr.io/linuxserver/jackett:latest
     container_name: jackett
@@ -62,4 +59,3 @@ soularr:
     ports:
       - 9117:9117
     restart: unless-stopped
->>>>>>> 681d5574c577dce14f8d3e0c5083dcaeeb6f1504
