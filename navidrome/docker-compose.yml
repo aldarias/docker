@@ -34,3 +34,16 @@ services:
       - /docker/navidrome/config:/config
       - /docker/navidrome/downloads:/downloads
     restart: unless-stopped
+
+soularr:
+    image: mrusse08/soularr:latest
+    restart: unless-stopped
+    container_name: soularr
+    hostname: soularr
+    environment: 
+      - TZ=Etc/UTC
+      - SCRIPT_INTERVAL=300
+    volumes:
+      - /docker/navidrome/downloads:/downloads
+      - /docker/navidrome/data:/data
+    
