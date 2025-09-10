@@ -1,5 +1,5 @@
-  version: '2'
-  services:
+version: '2'
+ services:
     mariadb:
        image: 'docker.io/bitnami/mariadb:10.1'
        environment:
@@ -25,10 +25,6 @@
         - '80:80' # http
         - '443:443' # https
      volumes:
-     - '/docker/moodle/bitnami/data:/bitnami'
-     - '/docker/moodle/bitnami/letsencrypt/certificates/DOMINIO.crt:/opt/bitnami/apache/conf/bitnami/certs/server.crt'
-    # cambiar la primera ruta por el nombre del certificado generado crt
-    - '/docker/moodle/bitnami/letsencrypt/certificates/DOMINIO.key:/opt/bitnami/apache/conf/bitnami/certs/server.key' 
-    # cambiar la primera ruta por el nombre del certificado generado key
+        - '/docker/moodle/bitnami/data:/bitnami'
      depends_on:
-      - mariadb  
+        - mariadb  
