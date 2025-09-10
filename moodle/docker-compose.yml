@@ -9,8 +9,7 @@ services:
           - MARIADB_PASSWORD=admin
           - MARIADB_ROOT_PASSWORD=admin
        volumes:
-         - /docker/moodle/mariadb:/bitnami/mariadb
-
+          - /docker/moodle/mariadb:/bitnami/mariadb
    moodle:
        image: "docker.io/bitnami/moodle:3"
        environment:
