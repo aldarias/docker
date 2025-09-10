@@ -1,30 +1,52 @@
-version: "2"
+version: '3.8'
+
 services:
-    mariadb:
-       image: "docker.io/bitnami/mariadb:10.1"
-       environment:
-          - MARIADB_USER=bn_moodle # usuario de la base de datos
-          - MARIADB_DATABASE=bitnami_moodle # nombre de la base de datos
-          - ALLOW_EMPTY_PASSWORD=no # no permite tener contraseñas de usuarios de la db vacías 
-          - MARIADB_PASSWORD=admin
-          - MARIADB_ROOT_PASSWORD=admin
-       volumes:
-          - /docker/moodle/mariadb:/bitnami/mariadb
-   moodle:
-       image: "docker.io/bitnami/moodle:3"
-       environment:
-        - MARIADB_HOST=mariadb # mismo que el especificado arriba
-        - MARIADB_PORT_NUMBER=3306 # por defecto 3306
-        - MOODLE_DATABASE_USER=bn_moodle # mismo que el especificado arriba
-        - MOODLE_DATABASE_NAME=bitnami_moodle # mismo que el especificado arriba
-        - MOODLE_DATABASE_PASSWORD=admin
-        - MOODLE_USERNAME=admin # usuario de moodle
-        - MOODLE_PASSWORD=moodle # contraseña del usuario de moodle creado
-        - MOODLE_EMAIL=paco.aldarias@gmail.com # email del usuario de moodle creado
-     ports:
-        - 80:80 # http
-        - 443:443 # https
-     volumes:
-        - /docker/moodle/mariadb:/bitnami/mariadb
-     depends_on:
-        - mariadb  
+  apache:
+    image: httpd:2.4
+    container_name: moodle_apache
+    ports:
+      - "80:80"
+      - "443:443"  
+    volumes:
+      - ./apache/conf/httpd.conf:/usr/local/apache2/conf/httpd.conf
+      - ./application/moodle:/var/www/moodle                       
+      - ./application/ssl:/etc/ssl/certs:ro                      
+    networks:
+      - moodle_network
+    depends_on:
+      - php
+
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile.php
+    container_name: moodle_php
+    volumes:
+      - ./application/moodle:/var/www/moodle
+      - ./application/moodledata:/var/www/moodledata
+      - ./php.ini:/usr/local/etc/php/conf.d/custom.ini
+    environment:
+      UPLOAD_MAX_FILESIZE: 512M
+      POST_MAX_SIZE: 512M
+      MEMORY_LIMIT: 2048M
+      MAX_INPUT_VARS: 9999
+    networks:
+      - moodle_network
+
+  mysql:
+    image: mysql:8.3
+    user: mysql
+    container_name: moodle_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: moodle
+      MYSQL_USER: moodleuser
+      MYSQL_PASSWORD: moodlepassword
+    volumes:
+      - ./application/mysql_data:/var/lib/mysql
+    networks:
+      - moodle_network
+
+networks:
+  moodle_network:
+    driver: bridge
