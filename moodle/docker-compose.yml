@@ -1,5 +1,8 @@
-version: '2'
- services:
+
+ version: '2'
+
+  services:
+
     mariadb:
        image: 'docker.io/bitnami/mariadb:10.1'
        environment:
@@ -10,6 +13,7 @@ version: '2'
           - MARIADB_ROOT_PASSWORD=admin
        volumes:
          - '/docker/moodle/mariadb-data:/bitnami'
+
    moodle:
        image: 'docker.io/bitnami/moodle:3'
        environment:
