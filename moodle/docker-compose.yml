@@ -20,8 +20,8 @@ services:
       - MOODLE_DATABASE_PORT_NUMBER=3306
       - MOODLE_DATABASE_USER=bn_moodle
       - MOODLE_DATABASE_NAME=bitnami_moodle
-      - MOODLE_USERNAME = user
-      - MOODLE_PASSWORD = bitname
+      - MOODLE_USERNAME=user
+      - MOODLE_PASSWORD=bitname
     volumes:
       - '/docker/moodle/moodledata:/bitnami'
     depends_on:
