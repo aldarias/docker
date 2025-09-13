@@ -2,14 +2,13 @@ services:
   mariadb:
     image: docker.io/bitnami/mariadb:latest
     environment:
-      - MARIADB_USER=admin
-      - MARIADB_PASSWORD=bitnami
+      - MARIADB_USER=bn_moodle
       - MARIADB_DATABASE=bitnami_moodle
       - MARIADB_CHARACTER_SET=utf8mb4
       - MARIADB_COLLATE=utf8mb4_unicode_ci
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - '/docker/moodle/mariadb_data:/bitnami/mariadb'
+      - '/docker/moodle/mariadb_data:/bitnami'
   moodle:
     image: docker.io/bitnami/moodle:5.0
     ports:
@@ -19,12 +18,10 @@ services:
       - MOODLE_DATABASE_HOST=mariadb
       - MOODLE_DATABASE_PORT_NUMBER=3306
       - MOODLE_DATABASE_USER=bn_moodle
-      - MOODLE_DATABASE_PASSWORD=adminpassword
       - MOODLE_DATABASE_NAME=bitnami_moodle
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - '/docker/moodle/moodle:/bitnami/moodle'
-      - '/docker/moodle/moodledata:/bitnami/moodledata'
+      - '/docker/moodle/moodledata:/bitnami'
     depends_on:
       - mariadb
 volumes:
