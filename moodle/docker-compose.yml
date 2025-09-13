@@ -4,6 +4,8 @@ services:
     environment:
       - MARIADB_USER=admin
       - MARIADB_PASSWORD=adminpassword
+      - MARIADB_ROOT_USER=rootuser
+      - MARIADB_ROOT_PASSWORD=rootpassword
       - MARIADB_DATABASE=bitnami_moodle
       - MARIADB_CHARACTER_SET=utf8mb4
       - MARIADB_COLLATE=utf8mb4_unicode_ci
