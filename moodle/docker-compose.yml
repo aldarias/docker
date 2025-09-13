@@ -8,7 +8,7 @@ services:
       - MARIADB_DATABASE=bitnami_moodle
       - MARIADB_CHARACTER_SET=utf8mb4
       - MARIADB_COLLATE=utf8mb4_unicode_ci
-      - ALLOW_EMPTY_PASSWORD=no
+      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - '/docker/moodle/mariadb_data:/bitnami'
   moodle:
@@ -22,9 +22,9 @@ services:
       - MOODLE_DATABASE_USER=bn_moodle
       - MOODLE_DATABASE_PASSWORD=bitnameroot
       - MOODLE_DATABASE_NAME=bitnami_moodle
-      - MOODLE_USERNAME=user
+      - MOODLE_USERNAME=admin
       - MOODLE_PASSWORD=bitname
-      - ALLOW_EMPTY_PASSWORD=no
+      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - '/docker/moodle/moodledata:/bitnami'
     depends_on:
